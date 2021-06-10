@@ -1,0 +1,14 @@
+def min_sum(arr):
+    arr.sort()
+    first = 0
+    second = 0
+    for i in range(0,len(arr)):
+        if i%2 == 0:
+            first = first*10 + arr[i]
+        else:
+            second = second*10 + arr[i]
+    val = first+second
+    return val
+# Driver code
+arr = [6, 8, 4, 5, 2, 3]
+print("the sum is: ",min_sum(arr))
