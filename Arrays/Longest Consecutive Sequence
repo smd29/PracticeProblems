@@ -1,0 +1,19 @@
+class Solution:
+    def longestConsecutive(self, arr: List[int]) -> int:
+        myset = set()
+        for i in arr:
+            myset.add(i)
+        longest = 0
+
+        #check whether start of the band
+        for i in arr:
+            before_elem = i-1
+            if before_elem not in myset:
+                #start the band from here
+                next_elem = i+1
+                count = 1
+                while next_elem in myset:
+                    next_elem += 1
+                    count += 1
+                longest = max(longest,count)
+        return longest
