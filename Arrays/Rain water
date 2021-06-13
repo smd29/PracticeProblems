@@ -1,6 +1,6 @@
 class Solution:
     def trap(self, arr: List[int]) -> int:
-        if len(arr)>0:
+        if len(arr)>2:
             left = [arr[0]]
             right = [0]*len(arr)
             right[-1] = arr[-1]
