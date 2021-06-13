@@ -1,0 +1,18 @@
+class Solution:
+    def trap(self, arr: List[int]) -> int:
+        if len(arr)>0:
+            left = [arr[0]]
+            right = [0]*len(arr)
+            right[-1] = arr[-1]
+
+            for i in range(1, len(arr)):
+                left.append(max(arr[i], left[i - 1]))
+
+            for j in range(len(arr)-2,-1,-1):
+                right[j] = max(arr[j],right[j+1])
+            requd = 0
+            for x in range(0,len(arr)):
+                requd += (min(left[x],right[x])-arr[x])
+            return requd
+        else:
+            return 0
