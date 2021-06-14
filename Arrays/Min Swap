@@ -1,0 +1,28 @@
+def minSawp(arr):
+
+    # position_array[i][0] = index and position_array[i][1] = value
+    position_array = [*enumerate(arr)]
+    position_array.sort(key=lambda x:x[1])
+
+    # check whether the element is visited or not
+    visited = {j:False for j in range(len(arr))}
+    ans = 0
+    for i in range(0,len(arr)):
+        # if the element is vistied or is in correct position
+        if visited[i] or position_array[i][0] == i:
+            continue
+        # visiting the element for the first time
+        cycle = 0
+        element = i
+        while not visited[element]:
+            visited[element] = True
+            # move to next element
+            element = position_array[element][0]
+            cycle += 1
+        if cycle > 0:
+            ans += (cycle-1)
+    return ans
+
+#driver code
+arr = [2,4,5,1,3]
+print(minSawp(arr))
