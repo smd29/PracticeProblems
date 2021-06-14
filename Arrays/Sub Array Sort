@@ -1,0 +1,36 @@
+import sys
+def OutOfOrder(arr, i):
+    x = arr[i]
+    if (i == 0):
+        return x > arr[i + 1]
+    if (i == len(arr) - 1):
+        return x < arr[i - 1]
+    return x > arr[i + 1] or x < arr[i - 1]
+
+
+def subarraySort(arr):
+    smallest = sys.maxsize
+    largest = 0
+
+    for i in range(0, len(arr) - 1):
+        element = arr[i]
+        if OutOfOrder(arr, i):
+            smallest = min(smallest, element)
+            largest = max(largest, element)
+
+    # find the correct position of smallest and largest
+    if smallest == sys.maxsize:
+        return -1, -1
+
+    left = 0
+    while smallest >= arr[left]:
+        left += 1
+    right = len(arr)-1
+    while largest <= arr[right]:
+        right -= 1
+    return left,right
+
+
+# driver code
+arr = [1, 2, 3, 4, 5, 8, 6, 7, 9, 10, 11]
+print(subarraySort(arr))
