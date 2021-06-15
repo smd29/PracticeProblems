@@ -1,0 +1,11 @@
+import re
+
+
+def searchAll(main_string, substring):
+    pos = [i.start() for i in re.finditer(substring, main_string)]
+    return pos
+
+# driver code
+main_string = "I liked the movie, acting in movie was great!"
+substring = "movie"
+print(searchAll(main_string,substring))
