@@ -1,0 +1,42 @@
+import sys
+def space20(my_string):
+    max_len = sys.maxsize
+    my_string = my_string.strip()
+    length = len(my_string)
+    #calculate spaces
+    spaces = 0
+    for i in my_string:
+        if i == ' ':
+            spaces += 1
+
+    new_len = len(my_string) + spaces*2
+
+
+    if new_len > max_len:
+        return -1
+
+    # start from the last index
+    idx = new_len - 1
+    my_string = list(my_string)
+
+    # fill the extra spaces created
+    for i in range(len(my_string)-2,new_len-2):
+        my_string.append('0')
+
+    # shift
+    for i in range(length-1,-1,-1):
+        if my_string[i] == ' ':
+            my_string[idx] = '0'
+            my_string[idx-1] = '2'
+            my_string[idx-2] = '%'
+            idx = idx-3
+        else:
+            my_string[idx] = my_string[i]
+            idx -= 1
+    return ''.join(my_string)
+
+
+
+#driver code
+my_string = "A B "
+print(space20(my_string))
