@@ -1,0 +1,19 @@
+def split(string,delim):
+    result = []
+    if not delim:
+        raise ValueError("Please provide Delimeter")
+    if not string:
+        return string
+    start = 0
+    for i,char in enumerate(string):
+        if char == delim:
+            result.append(string[start:i])
+            start = i+1
+    if start == 0:
+        return [string]
+    result.append(string[start:i+1])
+    return result
+    
+#driver code:
+string = "My name is Shreyas"
+print(split(string," "))
