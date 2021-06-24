@@ -1,0 +1,28 @@
+#There are some plots of certain sizes by one side of the road. A person needs to buy a plot of size 'k'. Find all the possibilities for the person.
+# in a list, there are some positive integers. Find all the consecutive indices, which sums 
+
+def housing(plots,k):
+    currentSum = 0
+    possible_ranges = []
+    i = 0
+    j = 0
+    while i<len(plots):
+
+        currentSum += plots[i]
+        possible_ranges.append(plots[i])
+        i += 1
+
+        while currentSum > k and j < i:
+            currentSum -= plots[j]
+            possible_ranges.pop(0)
+            j += 1
+
+        if currentSum == k:
+            print(possible_ranges)
+
+
+
+#driver code:
+plots = [1,3,2,1,4,1,3,2,1,1,2]
+k = 8
+housing(plots,k)
