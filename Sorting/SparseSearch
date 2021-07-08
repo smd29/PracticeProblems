@@ -1,0 +1,19 @@
+def sparseSearch(str_arr,low,high,word):
+    if low > high:
+        return -1
+    mid = (high+low)//2
+    while not str_arr[mid]:
+        mid += 1
+    if str_arr[mid] == word:
+        return mid+1
+    elif len(str_arr[mid]) > 0 and str_arr[mid] > word:
+        return sparseSearch(str_arr,low,mid-1,word)
+    elif len(str_arr[mid]) > 0 and str_arr[mid] < word:
+        return sparseSearch(str_arr,mid+1,high,word)
+
+
+#driver code:
+str_arr = ["ar","","","bat","","cat","dog","elephant",""]#,"goat","monkey"]
+word = "dog"
+pos = sparseSearch(str_arr,0,len(str_arr)-1,word)
+print(pos)
