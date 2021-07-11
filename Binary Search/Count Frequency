@@ -1,0 +1,39 @@
+def low_bound(arr,n):
+    low = 0
+    high = len(arr)-1
+    ans = -1
+
+    while low <= high:
+        mid = (low+high)//2
+        if arr[mid] < n:
+            low = mid+1
+        elif arr[mid] > n:
+            high = mid - 1
+        else:
+            ans = mid
+            high = mid - 1
+    return ans
+
+def upp_bound(arr,n):
+    low = 0
+    high = len(arr)-1
+    ans = -1
+
+    while low <= high:
+        mid = (low+high)//2
+        if arr[mid] < n:
+            low = mid+1
+        elif arr[mid] > n:
+            high = mid - 1
+        else:
+            ans = mid
+            low = mid + 1
+    return ans
+
+
+#driver code:
+arr = [0,1,1,2,2,2,2,3,4,5,6,6] #sorted array
+n = 2
+lower_val = low_bound(arr,n)
+upper_val = upp_bound(arr,n)
+print("Frequency of {number} is: {val} ".format(number=n,val=(upper_val-lower_val+1)))
