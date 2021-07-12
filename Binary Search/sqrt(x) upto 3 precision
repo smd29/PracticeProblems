@@ -1,0 +1,32 @@
+def sqrt(n):
+
+    #whole number
+    if n > 1:
+        low = 0
+        high = n//2
+        ans = 0
+        while low <= high:
+            mid = (low+high)//2
+
+            if mid*mid == n:
+                return mid
+            if mid*mid > n:
+                high = mid - 1
+            else:
+                ans = mid
+                low = mid + 1
+        
+        #decimal
+        inc = 0.1
+        for i in range(0,3): #upto 3 precision
+            #linear search
+            while ans*ans < n:
+                ans += inc
+            ans = ans-inc
+            ans = round(ans,3)
+            inc = inc/10
+        return ans
+
+
+val = sqrt(10)
+print(val)
