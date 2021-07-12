@@ -1,0 +1,35 @@
+def angryBirds(position,m):
+    n = len(position)
+    position.sort()
+    low = 0
+    #high will be difference of the sorted array
+    high = position[-1]-position[0]
+    ans = -1
+    while low <= high:
+        mid = (low+high)//2
+        place = canPlace(m,n,position,mid)
+        if place:
+            ans = mid
+            low = mid+1
+        else:
+            high = mid-1
+    return ans
+
+def canPlace(m,n,position,sep):
+    count = 1
+    location = position[0]
+    for i in range(1,n):
+        current_loc = position[i]
+        if current_loc - location >= sep:
+            count += 1
+            location = current_loc
+
+            if count == m:
+                return True
+
+    return False
+
+arr = [1,2,3,4,7]
+m = 3
+val = angryBirds(arr,m)
+print(val)
