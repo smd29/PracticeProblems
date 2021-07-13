@@ -1,0 +1,21 @@
+import sys
+
+def minPair(A,B):
+    B.sort()
+    val = sys.maxsize
+    stack = []
+    for i in range(0,len(B)):
+        #find closest number of B[i] in A
+        clo_num = min(A,key = lambda x:abs(x-B[i]))
+        diff = abs(clo_num-B[i])
+        if diff < val:
+            val = diff
+            if len(stack) > 0:
+                stack.pop()
+            stack.append((clo_num,B[i]))
+
+    print(stack)
+#driver code
+A = [-1,5,10,20,3]
+B = [26,134,135,15,17]
+minPair(A,B)
