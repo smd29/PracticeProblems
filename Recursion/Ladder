@@ -1,0 +1,9 @@
+def ladder(n):
+    if n == 0:
+        return 1
+    if n < 0:
+        return 0
+    return ladder(n-1)+ladder(n-2)+ladder(n-3)
+n = 4
+ways = ladder(n)
+print(f"{ways} ways are possible to reach {n}")
