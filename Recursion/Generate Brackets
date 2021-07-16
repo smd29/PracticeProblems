@@ -1,0 +1,13 @@
+class Solution:
+    def generateParenthesis(self, n: int) -> List[str]:
+        res = []
+        def bracket_code(output,open,close,index):
+            if index == 2*n:
+                res.append(output)
+                return 
+            if open < n:
+                bracket_code(output+"(",open+1,close,index+1)
+            if close < open:
+                bracket_code(output+")",open,close+1,index+1)
+        bracket_code("",0,0,0)
+        return res        
