@@ -1,0 +1,17 @@
+def subsetSum(arr,n,i,sum):
+    #base case:
+    if i == n:
+        if sum == 0:
+            return 1
+        else:
+            return 0
+
+    #recursion:
+    include_current_elem = subsetSum(arr,n,i+1,sum-arr[i])
+    exclude_current_elem = subsetSum(arr,n,i+1,sum)
+    return include_current_elem+exclude_current_elem
+
+arr = [1,2,3,4,5]
+sum = 10
+count = subsetSum(arr,len(arr),0,sum)
+print(f"Total {count} subsets are possible")
