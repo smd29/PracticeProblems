@@ -1,0 +1,50 @@
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.next = None
+
+
+class LinkedList:
+    def __init__(self):
+        self.head = None
+
+    def printLinkedList(self):
+        temp = self.head
+        while temp:
+            print(temp.data)
+            temp = temp.next
+
+    def insert_begining(self, new_data):
+        new_node = Node(new_data)
+        new_node.next = self.head
+        self.head = new_node
+
+    def reverse_rec(self):
+        if self.head is None:
+            return
+        self.reverseUtil(self.head, None)
+
+    def reverseUtil(self, current, prev):
+
+        if current.next is None:
+            self.head = current
+            current.next = prev
+            return
+        nextNode = current.next
+        current.next = prev
+
+        self.reverseUtil(nextNode, current)
+
+
+if __name__ == '__main__':
+    # Start with the empty list
+    llist = LinkedList()
+    llist.insert_begining(1)
+    llist.insert_begining(2)
+    llist.insert_begining(3)
+    llist.insert_begining(4)
+    print("The Linked list is: \n")
+    llist.printLinkedList()
+    print("After reversal, the Linked List is: \n")
+    llist.reverse_rec()
+    llist.printLinkedList()
