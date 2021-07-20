@@ -1,0 +1,57 @@
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.next = None
+
+
+class LinkedList:
+    def __init__(self):
+        self.head = None
+
+    def printLinkedList(self,head):
+        temp = head
+        while temp:
+            print(temp.data)
+            temp = temp.next
+
+    def insert_begining(self, new_data):
+        new_node = Node(new_data)
+        new_node.next = self.head
+        self.head = new_node
+
+
+    def k_rev(self,head,k):
+        if head == None:
+            return None
+        current = head
+        prev = None
+        count = 0
+
+        while current is not None and count < k:
+            nextNode = current.next
+            current.next = prev
+            prev = current
+            current = nextNode
+            count += 1
+
+
+        if nextNode:
+            head.next = self.k_rev(nextNode,k)
+        return prev
+
+if __name__ == '__main__':
+    # Start with the empty list
+    llist = LinkedList()
+    llist.insert_begining(8)
+    llist.insert_begining(7)
+    llist.insert_begining(6)
+    llist.insert_begining(5)
+    llist.insert_begining(4)
+    llist.insert_begining(3)
+    llist.insert_begining(2)
+    llist.insert_begining(1)
+    print("The Linked list is: \n")
+    llist.printLinkedList(llist.head)
+    print("After reversal, the Linked List is: \n")
+    new_head = llist.k_rev(llist.head,3)
+    llist.printLinkedList(new_head)
