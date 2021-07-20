@@ -16,19 +16,19 @@ class LinkedList:
         new_node = Node(new_data)
         new_node.next = self.head
         self.head = new_node
-
+    c = None
     def mergeLL(self,head1,head2):
         if head1 is None:
             return head2
         if head2 is None:
             return head1
         if head1.data <= head2.data:
-            head1.next = self.mergeLL(head1.next,head2)
-            return head1
+            temp = head1
+            temp.next = self.mergeLL(head1.next, head2)
         else:
-            head2.next = self.mergeLL(head1,head2.next)
-            return head2
-
+            temp = head2
+            temp.next = self.mergeLL(head1, head2.next)
+        return temp
 
 if __name__ == '__main__':
     # Start with the empty list
