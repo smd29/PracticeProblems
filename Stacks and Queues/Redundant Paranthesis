@@ -1,0 +1,23 @@
+class Solution:
+	# @param A : string
+	# @return an integer
+	def braces(self, A):
+        length = len(A)
+        
+		stack = []
+		for i in range(0,length):
+			if A[i] != ')':
+                stack.append(A[i])
+			else:
+				flag = False
+				while len(stack) != 0 and stack[len(stack)-1] != '(':
+					top_elem = stack[len(stack)-1]
+					if top_elem == '+' or top_elem == '-' or top_elem == '*' or top_elem == '/':
+						flag = True	
+					stack.pop()
+				stack.pop()
+				if flag == False:
+					#redundant
+					return 1
+		
+    return 0
