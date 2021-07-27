@@ -6,6 +6,8 @@ class Solution:
         mydict = dict()
         B = ""
         for i in A:
+        
+            #count of occurences
             if i not in mydict:
                 queue.append(i)
                 mydict[i] = 1
