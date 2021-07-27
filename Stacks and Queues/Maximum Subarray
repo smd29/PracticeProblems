@@ -1,0 +1,28 @@
+from collections import deque
+
+def printMax(arr,k):
+    Q = deque()
+    output = []
+    # first k elements
+    for i in range(0,k):
+        while Q and arr[i] > arr[Q[-1]]:
+            Q.pop()
+        Q.append(i)
+
+    #remaining elements
+    for i in range(k,len(arr)):
+        output.append(arr[Q[0]])
+        while Q and Q[0] <= i-k:
+            Q.popleft()
+        while Q and arr[i] > arr[Q[-1]]:
+            Q.pop()
+        Q.append(i)
+    output.append(arr[Q[0]])
+    return output
+
+
+# Driver code
+if __name__=="__main__":
+    arr = [1,2,3,1,4,5,2,3,5]
+    k = 3
+    print(printMax(arr,k))
