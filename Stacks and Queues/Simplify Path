@@ -1,0 +1,18 @@
+def simpPath(path):
+    stack = []
+    tokens = path.split('/')
+    print(tokens)
+    for i in tokens:
+        print("s")
+        if i == '..':
+            if stack:
+                stack.pop()
+        elif i.isalpha() or (i and i != '.'): #isalpha is false for Spaces in between
+            stack.append(i)
+        print(stack)
+    return '/' + '/'.join(stack) #add '/' in prefix and second '/' for join
+
+
+
+str_val =  "/../"
+print(simpPath(str_val))
