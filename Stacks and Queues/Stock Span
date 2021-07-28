@@ -1,0 +1,21 @@
+class StockSpanner:
+
+    def __init__(self):
+        self.spanner = []
+
+
+    def next(self, price: int) -> int:
+        count = 1 if not self.spanner else self.spanner[-1][1] + 1
+        while self.spanner:
+            if self.spanner[-1][0] <= price:
+                self.spanner.pop()
+            else:
+                break
+        span = count - (0 if not self.spanner else self.spanner[-1][1])
+        self.spanner.append((price,count))
+        
+        return span
+
+# Your StockSpanner object will be instantiated and called as such:
+# obj = StockSpanner()
+# param_1 = obj.next(price)
