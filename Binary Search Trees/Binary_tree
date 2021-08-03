@@ -32,8 +32,23 @@ class BSTNode:
             root.add_child(elements[i])
         return root
 
+    def inorder_traversal(self):
+        #left --> root --> right
+        elements = []
+
+        if self.left:
+            elements += self.left.inorder_traversal()
+
+        elements.append(self.data)
+
+        if self.right:
+            elements += self.right.inorder_traversal()
+
+        return elements
 
 if __name__ == '__main__':
     countries = ["India", "Pakistan", "Germany", "USA", "China", "India", "UK", "USA"]
     country_tree = BSTNode.build_tree(countries)
-    
+
+    number_tree = BSTNode.build_tree([17, 4, 1, 20, 9, 23, 18, 34])
+    print("In-Order Traversal: ", number_tree.inorder_traversal())
