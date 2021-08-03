@@ -90,6 +90,23 @@ class BSTNode:
                 return False
 
 
+    def find_min(self):
+        #minimum element will be in the left subtree
+        if self.left is None:
+            return self.data
+        return self.left.find_min()
+
+    def find_max(self):
+        #max element will be in the right subtree
+        if self.right is None:
+            return self.data
+        return self.right.find_max()
+
+    def calculate_sum(self):
+        left_sum = self.left.calculate_sum() if self.left else 0
+        right_sum = self.right.calculate_sum() if self.right else 0
+        return self.data + left_sum + right_sum
+
 if __name__ == '__main__':
     countries = ["India", "Pakistan", "Germany", "USA", "China", "India", "UK", "USA"]
     country_tree = BSTNode.build_tree(countries)
@@ -107,3 +124,11 @@ if __name__ == '__main__':
     #search
     print("does India exists in the list? \n --> ",country_tree.search_element("India"))
     print("does Australia exists in the list? \n --> ", country_tree.search_element("Australia"))
+
+
+    #min max
+    print("Minimum element in the tree is: ",number_tree.find_min())
+    print("Maximum element in the tree is: ", number_tree.find_max())
+    
+    #sum
+    print("Sum of all the elements is: ",number_tree.calculate_sum())
