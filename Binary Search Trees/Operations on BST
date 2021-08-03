@@ -46,6 +46,33 @@ class BSTNode:
 
         return elements
 
+    def preorder_traversal(self):
+        #root --> left --> right
+        elements = []
+        elements.append(self.data)
+
+        if self.left:
+            elements += self.left.inorder_traversal()
+
+        if self.right:
+            elements += self.right.inorder_traversal()
+
+        return elements
+
+    def postorder_traversal(self):
+        #left --> right --> root
+        elements = []
+
+        if self.left:
+            elements += self.left.inorder_traversal()
+
+        if self.right:
+            elements += self.right.inorder_traversal()
+
+        elements.append(self.data)
+
+        return elements
+
     def search_element(self,val):
         if self.data == val:
             return True
@@ -70,6 +97,12 @@ if __name__ == '__main__':
     #in-order traversal
     number_tree = BSTNode.build_tree([17, 4, 1, 20, 9, 23, 18, 34])
     print("In-Order Traversal: ", number_tree.inorder_traversal())
+
+    #pre-order traversal
+    print("Pre-Order Traversal: ", number_tree.preorder_traversal())
+
+    #post-order traversal
+    print("Post-Order Traversal: ", number_tree.postorder_traversal())
 
     #search
     print("does India exists in the list? \n --> ",country_tree.search_element("India"))
