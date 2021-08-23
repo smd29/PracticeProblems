@@ -1,0 +1,13 @@
+class Solution:
+    def intersection(self, nums1: List[int], nums2: List[int]) -> List[int]:
+        intersection_set = {}
+        result = []
+        for i in nums1:
+            intersection_set[i] = 1
+        
+        for i in nums2:
+            if i in intersection_set and intersection_set[i]:
+                result.append(i)
+                intersection_set[i] -= 1
+            
+        return result
