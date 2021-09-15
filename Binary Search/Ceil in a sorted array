@@ -1,0 +1,24 @@
+def findCeil(arr,low,high,target):
+    if target <= arr[low]:
+        return low
+    if target > arr[-1]:
+        return -1
+
+    while low <= high:
+        mid = (low+high)//2
+        if arr[mid] == target:
+            return mid
+        elif arr[mid] < target:
+            low = mid+1
+        else:
+            high = mid-1
+    return low  #just like binary search, if we don't find the element in the array, we return -1, here we have to return low
+
+arr = [1, 2, 8, 10, 11, 12, 19]
+n = len(arr)
+x = 0
+index = findCeil(arr, 0, n-1, x)
+if index != -1:
+    print(arr[index])
+else:
+    print("Outside the list")
