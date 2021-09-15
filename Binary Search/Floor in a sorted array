@@ -1,0 +1,24 @@
+def findFloor(arr,low,high,target):
+    if target <= arr[low]:
+        return -1
+    if target > arr[-1]:
+        return high
+
+    while low <= high:
+        mid = (low+high)//2
+        if arr[mid] == target:
+            return mid
+        elif arr[mid] < target:
+            low = mid+1
+        else:
+            high = mid-1
+    return high #in binary search we return -1, if the target is not in the range, here we need to return high
+
+arr = [1, 2, 8, 10, 11, 12, 19]
+n = len(arr)
+x = 5
+index = findFloor(arr, 0, n-1, x)
+if index != -1:
+    print(arr[index])
+else:
+    print("Outside the list")
