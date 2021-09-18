@@ -1,0 +1,23 @@
+https://leetcode.com/problems/missing-number/
+
+class Solution:
+    def missingNumber(self, nums: List[int]) -> int:
+        i = 0 
+        while i < len(nums):
+            
+            #in the sorted array, the index = value
+            correct_idx = nums[i]
+            #check if the correct_idx exists
+            if correct_idx < len(nums) and i != correct_idx:
+                #swap
+                nums[i],nums[correct_idx] = nums[correct_idx],nums[i]
+            else:
+                i += 1
+        
+        j = 0
+
+        while j < len(nums):
+            if nums[j] != j:
+                return j
+            j += 1
+        return len(nums)
