@@ -9,6 +9,9 @@ https://www.geeksforgeeks.org/maximum-profit-sale-wines/
 def sellingWines(left,right,y):
     if left > right:
         return 0
+        
+    if left == right:
+        return price[left]*year
     
     pick_left = y*price[left] + sellingWines(left+1,right,y+1)
     pick_right = y*price[right] + sellingWines(left,right-1,y+1)
