@@ -1,0 +1,24 @@
+'''
+Given n wines in a row, with integers denoting the cost of each wine respectively. 
+Each year you can sale the first or the last wine in the row. However, the price of wines increases over time. Let the initial profits from the wines be P1, P2, P3…Pn. On the Yth year, the profit from the ith wine will be Y*Pi
+Calculate maximum profit
+https://www.geeksforgeeks.org/maximum-profit-sale-wines/
+'''
+
+#code
+def sellingWines(left,right,y):
+    if left > right:
+        return 0
+    
+    pick_left = y*price[left] + sellingWines(left+1,right,y+1)
+    pick_right = y*price[right] + sellingWines(left,right-1,y+1)
+    
+    return max(pick_left,pick_right)
+    
+    
+n = int(input("Enter length of list: "))
+price = list(map(int,input().strip().split()))[:n]
+left = 0
+right = len(price) - 1
+ans = sellingWines(left,right,1)
+print(ans)
