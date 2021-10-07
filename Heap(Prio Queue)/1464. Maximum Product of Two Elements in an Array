@@ -1,0 +1,7 @@
+class Solution:
+    def maxProduct(self, nums: List[int]) -> int:
+        #creating a heap of negative numbers, as python doesn't support max heap
+        nums = [-(i-1) for i in nums]
+        heapq.heapify(nums)
+        #multiplication of two negative numbers is positive
+        return (heapq.heappop(nums)*heapq.heappop(nums))
