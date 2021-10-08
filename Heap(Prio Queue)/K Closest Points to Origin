@@ -1,0 +1,42 @@
+class Solution:
+    def kClosest(self, points: List[List[int]], k: int) -> List[List[int]]:
+        euc_dist = []
+        for i in points:
+            euc_dist.append(i[0] ** 2 + i[1] ** 2)
+        print(euc_dist)
+        l1 = euc_dist[:k]
+        l2 = euc_dist[k:]
+        #create a max heap of size k and for rest of the elems check with the root
+        self.build_maxheap(l1)
+        j = 0 
+        while j < len(l2):
+            if l1[0] > l2[j]:
+                l1[0],l2[j] = l2[j],l1[0]
+                self.max_heapify(l1,0)
+            j += 1
+
+        res = []
+        for i in l1:
+            idx = euc_dist.index(i)
+            res.append(points[idx])
+            euc_dist.remove(i)
+            points.pop(idx)
+        return res   
+    
+    
+    def max_heapify(self,nums,i):
+        largest = i
+        left = 2 * i + 1
+        right = 2 * i + 2
+        if left < len(nums) and nums[left] > nums[largest]:
+            largest = left
+        if right < len(nums) and nums[right] > nums[largest]:
+            largest = right
+        if largest != i:
+            nums[i],nums[largest] = nums[largest],nums[i]
+            self.max_heapify(nums,largest)
+        
+    def build_maxheap(self,nums):
+        start = len(nums)//2 - 1
+        for i in range(start,-1,-1):
+            self.max_heapify(nums,i)
