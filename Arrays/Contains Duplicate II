@@ -1,0 +1,23 @@
+'''
+Given an integer array nums and an integer k, return true if there are two distinct indices i and j in the array such that nums[i] == nums[j] and abs(i - j) <= k.
+
+problem link: https://leetcode.com/problems/contains-duplicate-ii/
+'''
+
+class Solution:
+    def containsNearbyDuplicate(self, nums: List[int], k: int) -> bool:
+        #create a window of size k and check if duplicates exist 
+        start, end = 0, k 
+        noDuplicates = set(nums[0:k+1])
+        
+        if len(noDuplicates) != len(nums[0:k+1]):
+            return True
+
+        while end < len(nums) - 1:
+            noDuplicates.discard(nums[start])
+            start += 1
+            end += 1
+            if nums[end] in noDuplicates:
+                return True
+            noDuplicates.add(nums[end])
+        return False
