@@ -1,0 +1,19 @@
+class Solution:
+    def rotate(self, matrix: List[List[int]]) -> None:
+        """
+        Do not return anything, modify matrix in-place instead.
+        """
+        #transpose
+        for i in range(len(matrix)):
+            for j in range(len(matrix)):
+                if i <= j:
+                    #swap 
+                    matrix[i][j],matrix[j][i] = matrix[j][i], matrix[i][j]
+        
+        #swap columns
+        start, end = 0, len(matrix) - 1
+        while start < end:
+            for i in range(len(matrix)):
+                matrix[i][start],matrix[i][end] = matrix[i][end],matrix[i][start]
+            start += 1
+            end -= 1
