@@ -1,0 +1,43 @@
+"""
+You are given an integer array nums. You want to maximize the number of points you get by performing the following operation any number of times:
+
+Pick any nums[i] and delete it to earn nums[i] points. Afterwards, you must delete every element equal to nums[i] - 1 and every element equal to nums[i] + 1.
+Return the maximum number of points you can earn by applying the above operation some number of times.
+
+link: https://leetcode.com/problems/delete-and-earn/
+
+"""
+
+
+class Solution:
+    def deleteAndEarn(self, nums: List[int]) -> int:
+        if len(nums) == 1:
+            return nums[0]
+        occurences = dict()
+        for i in nums:
+            if i in occurences:
+                occurences[i] += 1
+            else:
+                occurences[i] = 1
+        #remove repeating elements and sort 
+        nums = list(set(nums))
+        nums.sort()
+        
+        first = nums[0] * occurences[nums[0]]
+        if nums[1] - nums[0] == 1:
+            #we can't include the previous element
+            second = max(first,nums[1] * occurences[nums[1]])
+        else:
+            second = first + nums[1] * occurences[nums[1]]
+        
+        dp = [0] * len(nums)
+        dp[0] = first
+        dp[1] = second
+        
+        for i in range(2,len(dp)):
+            if nums[i] - nums[i-1] == 1:
+                # we can't include nums[i-1], we'll include nums[i]
+                dp[i] = max(dp[i-2] + nums[i] * occurences[nums[i]],dp[i-1])
+            else:
+                dp[i] = dp[i-1]+ nums[i] * occurences[nums[i]]
+        return dp[-1]
