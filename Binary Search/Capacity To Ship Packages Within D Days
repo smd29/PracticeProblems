@@ -1,0 +1,25 @@
+class Solution:
+    def shipWithinDays(self, weights: List[int], maxdays: int) -> int:
+        def ifFeasible(capacity):
+            days = 1 
+            current_wt = 0 
+            for w in weights:
+                current_wt += w
+                if current_wt > capacity:
+                    #don't include that weight
+                    current_wt = w
+                    days += 1
+                    if days > maxdays:
+                        return False
+            return True
+            
+        left = max(weights)
+        right = sum(weights)
+        while left < right:
+            mid = (left + right) // 2
+            #if with the 'mid' capacity we can meet our solution, then we need to minimize it
+            if ifFeasible(mid):
+                right = mid
+            else:
+                left = mid + 1
+        return left
